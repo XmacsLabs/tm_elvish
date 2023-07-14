@@ -3,11 +3,13 @@ var flush_any = { |content|
 }
 
 var flush_utf8 = { |content|
-  $flush_any "utf8:"$content
+  $flush_any "utf8:"(repr $content)
 }
 
-var line = "Elvish 0.19.2"
-while (not (eq $line "quit")) {
-  $flush_utf8 $line
-  set line = (read-line)
+$flush_utf8 "Elvish 0.19.2"
+
+while true {
+  var line = (read-line)
+  var result = [ (eval $line) ]
+  $flush_utf8 (repr (to-string $@result))
 }
