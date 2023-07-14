@@ -11,10 +11,12 @@ var flush_utf8 = { |content|
   $flush_end
 }
 
+var ns = (ns [&tm_elvish="0.0.1"])
+
 $flush_utf8 "Elvish 0.19.2"
 
 while true {
   var line = (read-line)
-  var result = [ (eval $line) ]
+  var result = [ (eval &ns=$ns $line) ]
   $flush_utf8 (repr (to-string $@result))
 }
