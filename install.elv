@@ -1,9 +1,13 @@
 use platform 
 
+var install = { |p|
+  rm -rf $p/elvish
+  mkdir $p/elvish
+  cp -r src $p/elvish
+  cp -r progs $p/elvish
+}
+
 if $platform:is-windows {
-  var PLUGIN_DIR = $E:APPDATA/TeXmacs/plugins
-  rm -rf $PLUGIN_DIR/elvish
-  mkdir $PLUGIN_DIR/elvish
-  cp -r src $PLUGIN_DIR/elvish
-  cp -r progs $PLUGIN_DIR/elvish
+  $install $E:APPDATA/TeXmacs/plugins
+  $install $E:APPDATA/Xmacs/plugins
 }

@@ -18,7 +18,11 @@ $flush_utf8 "Elvish 0.19.2"
 while true {
   var line = (read-line)
   if (not (eq $line "<EOF>")) {
-    var result = [ (eval &ns=$ns $line) ]
-    $flush_utf8 (repr (to-string $@result))
+    try {
+      var result = [ (eval &ns=$ns $line) ]
+      $flush_utf8 (repr (to-string $@result))
+    } catch e {
+      $flush_utf8 (to-string $e)
+    }
   }
 }
